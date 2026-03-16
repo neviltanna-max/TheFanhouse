@@ -736,6 +736,12 @@ font-family:var(--sans);}
 footer{background:#080705;padding:72px 0 40px;}
 .footer-inner{max-width:1280px;margin:0 auto;padding:0 64px;}
 .footer-top{display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px;}
+
+/* slight right shift for footer link columns */
+.footer-top > div:nth-child(n+2){
+  margin-left:12px;
+}
+
 .footer-logo{filter:brightness(0.6);height:32px;width:auto;display:block;margin-bottom:18px;}
 .footer-tag{font-size:13px;font-weight:300;color:rgba(251,245,236,0.25);line-height:1.85;max-width:220px;margin-bottom:24px;}
 .footer-ctas{display:flex;flex-direction:column;gap:8px;}
@@ -2202,7 +2208,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="max-width:1200px;margin:0 auto;padding:0 64px;">
       <section class="contact-header">
         <h2>Get in Touch</h2>
-        <p>Have questions about Fanhouse Residency? We'd love to hear from you. Reach out through any channel that works best for you.</p>
+        <p>Questions, collaborations, or just curious?
+We’d love to hear from you.</p>
       </section>
 
       <div class="contact-methods" id="contact">
