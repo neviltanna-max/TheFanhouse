@@ -1228,6 +1228,13 @@ footer{background:#080705;padding:72px 0 40px;}
 .mf-btn-ghost { background: transparent; color: rgba(26,20,16,0.4); border: 1.5px solid rgba(26,20,16,0.13); }
 .mf-btn-ghost:hover { color: var(--ink); border-color: rgba(26,20,16,0.3); }
 .mf-btn[disabled] { opacity: 0.3; pointer-events: none; }
+.mf-btn-submit {
+  background: linear-gradient(135deg, var(--amber), var(--gold));
+  color: var(--ink);
+  letter-spacing: 0.18em;
+  box-shadow: 0 4px 20px rgba(235,200,74,0.3);
+}
+.mf-btn-submit:hover { background: linear-gradient(135deg, #F0B020, var(--amber)); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(235,200,74,0.45); }
 .mf-dots { display: flex; gap: 7px; align-items: center; }
 .mf-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(26,20,16,0.15); transition: all 0.25s; }
 .mf-dot.active { background: var(--fire); width: 20px; border-radius: 3px; }
@@ -1680,16 +1687,10 @@ Because sometimes the best way to understand someone you admire is simply to spe
     <!-- Header -->
     <div class="modal-header">
       <div>
-        <div class="modal-title">Apply for the Residency</div>
+        <div class="modal-title">Apply for the Fanhouse Experience</div>
         
       </div>
       <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-    </div>
-
-    <!-- Progress bar -->
-    <div class="mf-progress-wrap">
-      <div class="mf-progress-bar" id="mfProgress"></div>
-      <span class="mf-progress-label" id="mfProgressLabel">Step 1 of 5</span>
     </div>
 
     <!-- Form body -->
@@ -1697,12 +1698,10 @@ Because sometimes the best way to understand someone you admire is simply to spe
 
       <!-- ── STEP 1: About You ── -->
       <div class="mf-step active" data-step="1">
-        <div class="mf-step-eyebrow">01 &nbsp; About You</div>
-        <div class="mf-step-title">Let's start with the basics.</div>
 
 <div class="mf-field">
   <label class="mf-label">Choose the Chapter <span class="req">*</span></label>
-  <select class="mf-input" required>
+  <select class="mf-input" id="f_chapter" required>
     <option value="">Select an option</option>
     <option>Fanhouse Residency with Bharat Chandak - 20th to 24th April 2026</option>
     <option>Fanhouse Club trip to Bhutan - 2nd to 6th August 2026</option>
@@ -1736,160 +1735,13 @@ Because sometimes the best way to understand someone you admire is simply to spe
 
         <div class="mf-field">
           <label class="mf-label" for="f_busy">Is there anything you want to share with us?</label>
-          <textarea class="mf-textarea" id="f_busy" rows="3" placeholder="Tell us what occupies most of your time — work, projects, hobbies, or everyday life."></textarea>
-        </div>
-      </div>
-
-      <!-- ── STEP 2: Your Connection ── -->
-      <div class="mf-step" data-step="2">
-        <div class="mf-step-eyebrow">02 &nbsp; Your Connection</div>
-        <div class="mf-step-title">How did you find us?</div>
-
-        <div class="mf-field">
-          <label class="mf-label">How did you hear about The Fanhouse Club?</label>
-          <div class="mf-radio-group" id="f_hear">
-            <label class="mf-radio-opt"><input type="radio" name="hear" value="creators_instagram"><span class="mf-radio-box"></span><span>Creator's Instagram</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="hear" value="word_of_mouth"><span class="mf-radio-box"></span><span>Word of Mouth</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="hear" value="tfc_social"><span class="mf-radio-box"></span><span>TFC Social Media</span></label>
-            <label class="mf-radio-opt mf-radio-other"><input type="radio" name="hear" value="other"><span class="mf-radio-box"></span><span>Other:</span>
-              <input class="mf-other-input" type="text" id="f_hear_other" placeholder="Tell us…">
-            </label>
-          </div>
+          <textarea class="mf-textarea" id="f_busy" rows="3" placeholder="Tell us anything you'd like us to know..."></textarea>
         </div>
 
-        <div class="mf-field">
-          <label class="mf-label" for="f_draws">What draws you to this residency?</label>
-          <textarea class="mf-textarea" id="f_draws" rows="3" placeholder="What made you stop scrolling and hit apply?"></textarea>
+        <div class="mf-field" style="margin-top:8px;">
+          <button class="mf-btn mf-btn-fire" id="mfSubmit" style="width:100%;padding:16px 28px;font-size:12px;letter-spacing:0.2em;">Submit Application ✦</button>
         </div>
 
-        <div class="mf-field">
-          <label class="mf-label" for="f_goa">What are you hoping to create, explore, or experience in Goa?</label>
-          <textarea class="mf-textarea" id="f_goa" rows="3" placeholder="Paint us a picture…"></textarea>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_skills">Your main skills, interests, or creative medium</label>
-          <input class="mf-input" type="text" id="f_skills" placeholder="art, acting, writing, music, photography, etc.">
-        </div>
-      </div>
-
-      <!-- ── STEP 3: Who You Are ── -->
-      <div class="mf-step" data-step="3">
-        <div class="mf-step-eyebrow">03 &nbsp; Who You Are</div>
-        <div class="mf-step-title">Tell us a little more about yourself.</div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_bring">If you could bring one thing to the residency — an object, song, book, or idea — what would it be?</label>
-          <textarea class="mf-textarea" id="f_bring" rows="3" placeholder="And why?"></textarea>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_prev">Have you participated in residencies, workshops, or creative retreats before?</label>
-          <textarea class="mf-textarea" id="f_prev" rows="3" placeholder="If yes, tell us a bit about it."></textarea>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label">What's your usual vibe in a group?</label>
-          <div class="mf-radio-group" id="f_vibe">
-            <label class="mf-radio-opt">
-              <input type="radio" name="vibe" value="lead">
-              <span class="mf-radio-box"></span>
-              <span><strong>I lead and organize</strong> — I naturally take charge or help guide the group.</span>
-            </label>
-            <label class="mf-radio-opt">
-              <input type="radio" name="vibe" value="observe">
-              <span class="mf-radio-box"></span>
-              <span><strong>I observe and contribute when needed</strong> — I listen first, then share my thoughts.</span>
-            </label>
-            <label class="mf-radio-opt">
-              <input type="radio" name="vibe" value="collaborate">
-              <span class="mf-radio-box"></span>
-              <span><strong>I collaborate and support</strong> — I enjoy working alongside others and helping ideas grow.</span>
-            </label>
-            <label class="mf-radio-opt">
-              <input type="radio" name="vibe" value="energy">
-              <span class="mf-radio-box"></span>
-              <span><strong>I bring energy and spontaneity</strong> — I'm the one who sparks fun, creativity, or fresh ideas.</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── STEP 4: The Creator ── -->
-      <div class="mf-step" data-step="4">
-        <div class="mf-step-eyebrow">04 &nbsp; The Creator</div>
-        <div class="mf-step-title">Your relationship with the creator.</div>
-
-        <div class="mf-field">
-          <label class="mf-label">How long have you been following [Creator Name]?</label>
-          <div class="mf-radio-group" id="f_following">
-            <label class="mf-radio-opt"><input type="radio" name="following" value="lt6m"><span class="mf-radio-box"></span><span>Less than 6 months</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="following" value="6to12m"><span class="mf-radio-box"></span><span>6–12 months</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="following" value="1to3y"><span class="mf-radio-box"></span><span>1–3 years</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="following" value="gt3y"><span class="mf-radio-box"></span><span>More than 3 years</span></label>
-          </div>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_resonates">What about their work or journey resonates with you the most?</label>
-          <textarea class="mf-textarea" id="f_resonates" rows="3" placeholder="Be as specific as you like…"></textarea>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_collab">If chosen, how would you like to connect or collaborate with [Creator Name] during the residency?</label>
-          <textarea class="mf-textarea" id="f_collab" rows="3" placeholder="Any ideas, projects, or simply how you'd love to spend that time…"></textarea>
-        </div>
-      </div>
-
-      <!-- ── STEP 5: Commitments & Video ── -->
-      <div class="mf-step" data-step="5">
-        <div class="mf-step-eyebrow">05 &nbsp; Commitments</div>
-        <div class="mf-step-title">A few important confirmations.</div>
-
-        <div class="mf-field">
-          <label class="mf-label">The Fanhouse Community maintains a strict <strong>no-alcohol and no-substance policy</strong>. Are you okay with this? <span class="req">*</span></label>
-          <div class="mf-radio-group mf-radio-inline" id="f_policy">
-            <label class="mf-radio-opt"><input type="radio" name="policy" value="yes" required><span class="mf-radio-box"></span><span>Yes</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="policy" value="no"><span class="mf-radio-box"></span><span>No</span></label>
-          </div>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_medical">Medical conditions, dietary needs, allergies, or mental health considerations</label>
-          <textarea class="mf-textarea" id="f_medical" rows="3" placeholder="This information will remain confidential and is used solely to ensure your safety and comfort."></textarea>
-          <div class="mf-hint">This information is completely confidential.</div>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label">Are you able to participate for the full duration (3 nights / 4 days)? <span class="req">*</span></label>
-          <div class="mf-radio-group mf-radio-inline" id="f_duration">
-            <label class="mf-radio-opt"><input type="radio" name="duration" value="yes" required><span class="mf-radio-box"></span><span>Yes</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="duration" value="no"><span class="mf-radio-box"></span><span>No</span></label>
-          </div>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label">Are you able to make the full payment by the communicated deadline if selected? <span class="req">*</span></label>
-          <div class="mf-radio-group mf-radio-inline" id="f_payment">
-            <label class="mf-radio-opt"><input type="radio" name="payment" value="yes" required><span class="mf-radio-box"></span><span>Yes</span></label>
-            <label class="mf-radio-opt"><input type="radio" name="payment" value="no"><span class="mf-radio-box"></span><span>No</span></label>
-          </div>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label">Do you acknowledge and agree to abide by the policies below? <span class="req">*</span></label>
-          <div class="mf-check-group">
-            <label class="mf-check-opt"><input type="checkbox" id="f_pol1" required><span class="mf-check-box"></span><span>Alcohol &amp; Substance Abuse Policy</span></label>
-            <label class="mf-check-opt"><input type="checkbox" id="f_pol2" required><span class="mf-check-box"></span><span>Code of Conduct</span></label>
-            <label class="mf-check-opt"><input type="checkbox" id="f_pol3" required><span class="mf-check-box"></span><span>Cancellation &amp; Refund Policy</span></label>
-          </div>
-        </div>
-
-        <div class="mf-field">
-          <label class="mf-label" for="f_video">Share a short video (60–120 seconds)</label>
-          <input class="mf-input" type="url" id="f_video" placeholder="Paste a link to your video (YouTube, Drive, Dropbox, etc.)">
-          <div class="mf-hint">Introduce yourself as if we were sitting across a table in Goa. No scripts, no edits — just be yourself. You can include your name and what you do, something you're passionate about, a fun fact, and why you're excited about this residency.</div>
-        </div>
       </div>
 
       <!-- ── SUCCESS ── -->
@@ -1901,19 +1753,6 @@ Because sometimes the best way to understand someone you admire is simply to spe
       </div>
 
     </div><!-- /mf-body -->
-
-    <!-- Footer nav -->
-    <div class="mf-footer" id="mfFooter">
-      <button class="mf-btn mf-btn-ghost" id="mfBack">← Back</button>
-      <div class="mf-dots" id="mfDots">
-        <span class="mf-dot active"></span>
-        <span class="mf-dot"></span>
-        <span class="mf-dot"></span>
-        <span class="mf-dot"></span>
-        <span class="mf-dot"></span>
-      </div>
-      <button class="mf-btn mf-btn-fire" id="mfNext">Continue →</button>
-    </div>
 
   </div><!-- /modal-box -->
 </div><!-- /modal-backdrop -->
@@ -1946,43 +1785,18 @@ Because sometimes the best way to understand someone you admire is simply to spe
     if (e.key === "Escape") closeModal();
   });
 
-  /* ══ MULTI-STEP FORM ══ */
-  var TOTAL_STEPS = 5;
-  var currentStep = 1;
+  /* ══ SINGLE-STEP FORM SUBMIT ══ */
+  var mfSubmit = document.getElementById("mfSubmit");
+  var mfBody   = document.getElementById("mfBody");
 
-  var mfBody     = document.getElementById("mfBody");
-  var mfNext     = document.getElementById("mfNext");
-  var mfBack     = document.getElementById("mfBack");
-  var mfProgress = document.getElementById("mfProgress");
-  var mfLabel    = document.getElementById("mfProgressLabel");
-  var mfFooter   = document.getElementById("mfFooter");
-  var mfDots     = document.querySelectorAll(".mf-dot");
-
-  function getStep(n) { return mfBody.querySelector('[data-step="' + n + '"]'); }
-
-  function updateUI() {
-    // progress bar
-    var pct = (currentStep / TOTAL_STEPS) * 100;
-    mfProgress.style.width = pct + "%";
-    mfLabel.textContent = "Step " + currentStep + " of " + TOTAL_STEPS;
-    // dots
-    mfDots.forEach(function(d, i) { d.classList.toggle("active", i === currentStep - 1); });
-    // back button
-    mfBack.disabled = currentStep === 1;
-    // next button label
-    mfNext.textContent = currentStep === TOTAL_STEPS ? "Submit Application →" : "Continue →";
-    // scroll form body to top
-    mfBody.scrollTop = 0;
-  }
-
-  function validateStep(n) {
-    var step = getStep(n);
-    var ok = true;
+  function validateAndSubmit() {
+    var step = mfBody.querySelector('[data-step="1"]');
 
     // Clear previous errors
     step.querySelectorAll(".mf-error-msg").forEach(function(m) { m.classList.remove("show"); });
     step.querySelectorAll(".error").forEach(function(el) { el.classList.remove("error"); });
 
+    var ok = true;
     function err(el, msg) {
       el.classList.add("error");
       var m = el.nextElementSibling;
@@ -1993,97 +1807,31 @@ Because sometimes the best way to understand someone you admire is simply to spe
       }
       m.textContent = msg || "This field is required.";
       m.classList.add("show");
+      if (ok) el.scrollIntoView({ behavior: "smooth", block: "center" });
       ok = false;
     }
 
-    if (n === 1) {
-      var name  = document.getElementById("f_name");
-      var phone = document.getElementById("f_phone");
-      var email = document.getElementById("f_email");
-      if (!name.value.trim())  err(name,  "Please enter your full name.");
-      if (!phone.value.trim()) err(phone, "Please enter your phone number.");
-      if (!email.value.trim() || !email.value.includes("@")) err(email, "Please enter a valid email.");
-    }
-    if (n === 5) {
-      var policy   = step.querySelector('input[name="policy"]:checked');
-      var duration = step.querySelector('input[name="duration"]:checked');
-      var payment  = step.querySelector('input[name="payment"]:checked');
-      var pol1 = document.getElementById("f_pol1");
-      var pol2 = document.getElementById("f_pol2");
-      var pol3 = document.getElementById("f_pol3");
-      if (!policy)   { err(step.querySelector('#f_policy'),   "Please select an option."); }
-      if (!duration) { err(step.querySelector('#f_duration'), "Please select an option."); }
-      if (!payment)  { err(step.querySelector('#f_payment'),  "Please select an option."); }
-      if (!pol1.checked || !pol2.checked || !pol3.checked) {
-        var cg = step.querySelector(".mf-check-group");
-        cg.style.outline = "2px solid #c0392b";
-        cg.style.borderRadius = "3px";
-        ok = false;
-        var em = cg.nextElementSibling;
-        if (!em || !em.classList.contains("mf-error-msg")) {
-          em = document.createElement("div");
-          em.className = "mf-error-msg";
-          cg.parentNode.insertBefore(em, cg.nextSibling);
-        }
-        em.textContent = "Please acknowledge all policies to continue.";
-        em.classList.add("show");
-      } else {
-        var cg2 = step.querySelector(".mf-check-group");
-        if (cg2) cg2.style.outline = "";
-      }
-    }
-    return ok;
-  }
+    var chapter = document.getElementById("f_chapter");
+    var name    = document.getElementById("f_name");
+    var phone   = document.getElementById("f_phone");
+    var email   = document.getElementById("f_email");
 
-  function goNext() {
-    if (currentStep > TOTAL_STEPS) return;
-    if (!validateStep(currentStep)) {
-      // Scroll to first error
-      var firstErr = getStep(currentStep).querySelector(".error, .mf-error-msg.show");
-      if (firstErr) firstErr.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
-    }
+    if (!chapter.value) err(chapter, "Please choose a chapter.");
+    if (!name.value.trim())  err(name,  "Please enter your full name.");
+    if (!phone.value.trim()) err(phone, "Please enter your phone number.");
+    if (!email.value.trim() || !email.value.includes("@")) err(email, "Please enter a valid email.");
 
-    var leaving = getStep(currentStep);
-    leaving.classList.add("exit");
+    if (!ok) return;
 
-    if (currentStep === TOTAL_STEPS) {
-      // Submit: show success
-      setTimeout(function() {
-        leaving.classList.remove("active", "exit");
-        currentStep = 6;
-        var success = getStep(6);
-        success.classList.add("active");
-        mfFooter.style.display = "none";
-        mfProgress.style.width = "100%";
-        mfLabel.textContent = "Application Submitted";
-      }, 280);
-    } else {
-      currentStep++;
-      setTimeout(function() {
-        leaving.classList.remove("active", "exit");
-        getStep(currentStep).classList.add("active");
-        updateUI();
-      }, 280);
-    }
-  }
-
-  function goBack() {
-    if (currentStep <= 1) return;
-    var leaving = getStep(currentStep);
-    leaving.classList.add("exit");
-    currentStep--;
+    // Show success
+    step.classList.add("exit");
     setTimeout(function() {
-      leaving.classList.remove("active", "exit");
-      getStep(currentStep).classList.add("active");
-      updateUI();
+      step.classList.remove("active", "exit");
+      mfBody.querySelector('[data-step="6"]').classList.add("active");
     }, 280);
   }
 
-  if (mfNext) mfNext.addEventListener("click", goNext);
-  if (mfBack) mfBack.addEventListener("click", goBack);
-
-  updateUI();
+  if (mfSubmit) mfSubmit.addEventListener("click", validateAndSubmit);
 
   /* ══ NAV SCROLL ══ */
   var nav = document.getElementById("nav");
