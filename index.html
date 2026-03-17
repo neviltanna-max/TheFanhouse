@@ -44,6 +44,26 @@
   }
 
   window.addEventListener('DOMContentLoaded', handleInitialRoute);
+
+  function scrollToCommunity(e) {
+    e.preventDefault();
+
+    // Switch to home
+    navigateToPage('home');
+
+    // Wait for layout to update, then scroll ONCE
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const target = document.getElementById('community');
+        if (target) {
+          const yOffset = -80;
+          const y = target.offsetTop + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
 </script>
 <style>
 :root {
@@ -1625,8 +1645,8 @@ Because sometimes the best way to understand someone you admire is simply to spe
         <div class="footer-col-ttl">Community</div>
         <ul class="footer-links">
           <li></li>
-          <li><a href="#trust">The Fanhouse Club</a></li>
-          <li><a href="#apply-section">The Fanhouse Residency</a></li>
+          <li><a href="#" onclick="scrollToCommunity(event)">The Fanhouse Club</a></li>
+          <li><a href="#" onclick="scrollToCommunity(event)">The Fanhouse Residency</a></li>
         </ul>
       </div>
       <div>
@@ -2303,8 +2323,8 @@ We’d love to hear from you.</p>
         <div class="footer-col-ttl">Community</div>
         <ul class="footer-links">
           <li></li>
-          <li><a href="#trust">The Fanhouse Club</a></li>
-          <li><a href="#apply-section">The Fanhouse Residency</a></li>
+          <li><a href="#" onclick="scrollToCommunity(event)">The Fanhouse Club</a></li>
+          <li><a href="#" onclick="scrollToCommunity(event)">The Fanhouse Residency</a></li>
         </ul>
       </div>
       <div>
