@@ -1287,7 +1287,18 @@ footer{background:#080705;padding:72px 0 40px;}
 .ccard-members{display:none !important;}
 </style>
 
+<style>
+.mf-step:not(:first-of-type){ display:none !important; }
+.mf-progress-wrap,.mf-footer{ display:none !important; }
+.mf-step-eyebrow{ display:none !important; }
+</style>
 
+
+<style>
+.goa-hero-img img {
+  content: url('20231211_230644.jpg') !important;
+}
+</style>
 
 </head>
 <body>
@@ -1744,8 +1755,8 @@ Because sometimes the best way to understand someone you admire is simply to spe
       <div class="mf-step mf-success" data-step="6">
         <div class="mf-success-icon">✦</div>
         <div class="mf-success-title">Application Received</div>
-        <div class="mf-success-body">Thank you for applying to the Fanhouse Experience. We read every single application. If you're shortlisted, we'll reach out via the phone number and email you provided.<br><br>In the meantime follow us on Instagram - <a href="https://instagram.com/thefanhousecommunity" target="_blank" style="color:var(--fire);text-decoration:none;font-weight:500;">@thefanhousecommunity</a></div>
-        <div class="mf-success-tag" id="successChapter"></div>
+        <div class="mf-success-body">Thank you for applying to the Fanhouse Residency, Goa 2025. We read every single application. If you're shortlisted, we'll reach out via the phone number and email you provided.<br><br>In the meantime — keep creating.</div>
+        <div class="mf-success-tag">The Fanhouse Club Goa 2025</div>
       </div>
 
     </div><!-- /mf-body -->
@@ -1782,8 +1793,6 @@ Because sometimes the best way to understand someone you admire is simply to spe
   });
 
   /* ══ SINGLE-STEP FORM SUBMIT ══ */
-  var SHEET_URL = "https://script.google.com/macros/s/AKfycbw2m2dNYebxKeap3pZTM2EksPWZSdOqH-3pIL323ub8CVvdje_GueRklVazyTkO9KN0/exec";
-
   var mfSubmit = document.getElementById("mfSubmit");
   var mfBody   = document.getElementById("mfBody");
 
@@ -1809,60 +1818,24 @@ Because sometimes the best way to understand someone you admire is simply to spe
       ok = false;
     }
 
-    var chapter  = document.getElementById("f_chapter");
-    var name     = document.getElementById("f_name");
-    var phone    = document.getElementById("f_phone");
-    var email    = document.getElementById("f_email");
-    var location = document.getElementById("f_location");
-    var message  = document.getElementById("f_busy");
+    var chapter = document.getElementById("f_chapter");
+    var name    = document.getElementById("f_name");
+    var phone   = document.getElementById("f_phone");
+    var email   = document.getElementById("f_email");
 
-    if (!chapter.value)      err(chapter, "Please choose a chapter.");
-    if (!name.value.trim())  err(name,    "Please enter your full name.");
-    if (!phone.value.trim()) err(phone,   "Please enter your phone number.");
+    if (!chapter.value) err(chapter, "Please choose a chapter.");
+    if (!name.value.trim())  err(name,  "Please enter your full name.");
+    if (!phone.value.trim()) err(phone, "Please enter your phone number.");
     if (!email.value.trim() || !email.value.includes("@")) err(email, "Please enter a valid email.");
 
     if (!ok) return;
 
-    // Disable button and show loading state
-    mfSubmit.disabled = true;
-    mfSubmit.textContent = "Submitting…";
-
-    var payload = {
-      chapter:  chapter.value,
-      name:     name.value.trim(),
-      phone:    phone.value.trim(),
-      email:    email.value.trim(),
-      location: location.value.trim(),
-      message:  message.value.trim()
-    };
-
-    fetch(SHEET_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    })
-    .then(function() {
-      // no-cors means we can't read the response, but if no error was thrown it went through
-      step.classList.add("exit");
-      setTimeout(function() {
-        step.classList.remove("active", "exit");
-        document.getElementById("successChapter").textContent = chapter.value;
-        mfBody.querySelector('[data-step="6"]').classList.add("active");
-      }, 280);
-    })
-    .catch(function() {
-      mfSubmit.disabled = false;
-      mfSubmit.textContent = "Submit Application ✦";
-      var errDiv = step.querySelector(".mf-submit-error");
-      if (!errDiv) {
-        errDiv = document.createElement("div");
-        errDiv.className = "mf-submit-error";
-        errDiv.style.cssText = "color:#c0392b;font-size:12px;font-weight:500;margin-top:12px;text-align:center;";
-        mfSubmit.parentNode.appendChild(errDiv);
-      }
-      errDiv.textContent = "Something went wrong. Please try again.";
-    });
+    // Show success
+    step.classList.add("exit");
+    setTimeout(function() {
+      step.classList.remove("active", "exit");
+      mfBody.querySelector('[data-step="6"]').classList.add("active");
+    }, 280);
   }
 
   if (mfSubmit) mfSubmit.addEventListener("click", validateAndSubmit);
