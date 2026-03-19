@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Fanhouse Residency, Goa 2025</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init({ publicKey: "mu-KUOO9z784cWyer" });
+  })();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital, wght@0, 700;0, 900;1, 400;1, 700;1, 900&family=Space+Grotesk:wght@300;400;500;600&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
 <script>
   // PAGE NAVIGATION FUNCTION - DEFINE EARLY
@@ -1299,7 +1305,7 @@ footer{background:#080705;padding:72px 0 40px;}
 </style>
 
 <style>
-.mf-step:not(:first-of-type){ display:none !important; }
+.mf-step:not(:first-of-type):not(.active){ display:none !important; }
 .mf-progress-wrap, .mf-footer{ display:none !important; }
 .mf-step-eyebrow{ display:none !important; }
 </style>
@@ -1678,7 +1684,7 @@ Because sometimes the best way to understand someone you admire is simply to spe
       <div>
         <div class="footer-col-ttl">Contact</div>
         <ul class="footer-links">
-          <li><a href="mailto:contact@thefanhouseco.com">contact@thefanhouseco.com</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#fc9f9392889d9f88bc8894999a9d929493898f999f93d29f9391"><span class="__cf_email__" data-cfemail="8deee2e3f9eceef9cdf9e5e8ebece3e5e2f8fee8eee2a3eee2e0">[email&#160;protected]</span></a></li>
           <li><a href="tel:+918200430753">+91 8200430753</a></li>
           <li><a href="tel:+919910057640">+91 99100 57640</a></li>
           <li><a href="https://instagram.com/thefanhousecommunity" target="_blank">@thefanhousecommunity</a></li>
@@ -1777,7 +1783,7 @@ Because sometimes the best way to understand someone you admire is simply to spe
 
   </div><!-- /modal-box -->
 </div><!-- /modal-backdrop -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
 
   /* ══ MODAL OPEN / CLOSE ══ */
@@ -1832,10 +1838,12 @@ Because sometimes the best way to understand someone you admire is simply to spe
       ok = false;
     }
 
-    var chapter = document.getElementById("f_chapter");
-    var name    = document.getElementById("f_name");
-    var phone   = document.getElementById("f_phone");
-    var email   = document.getElementById("f_email");
+    var chapter  = document.getElementById("f_chapter");
+    var name     = document.getElementById("f_name");
+    var phone    = document.getElementById("f_phone");
+    var email    = document.getElementById("f_email");
+    var location = document.getElementById("f_location");
+    var busy     = document.getElementById("f_busy");
 
     if (!chapter.value) err(chapter, "Please choose a chapter.");
     if (!name.value.trim())  err(name,  "Please enter your full name.");
@@ -1844,12 +1852,43 @@ Because sometimes the best way to understand someone you admire is simply to spe
 
     if (!ok) return;
 
-    // Show success
-    step.classList.add("exit");
-    setTimeout(function() {
-      step.classList.remove("active", "exit");
-      mfBody.querySelector('[data-step="6"]').classList.add("active");
-    }, 280);
+    // Disable button to prevent double-submit
+    mfSubmit.disabled = true;
+    mfSubmit.textContent = "Submitting…";
+
+    // Build email body
+    var body = [
+      "Chapter: "          + chapter.value,
+      "Full Name: "        + name.value.trim(),
+      "Phone: "            + phone.value.trim(),
+      "Email: "            + email.value.trim(),
+      "Location: "         + (location.value.trim() || "—"),
+      "Anything to share: "+ (busy.value.trim()     || "—")
+    ].join("\n");
+
+    var templateParams = {
+      applicant_name: name.value.trim(),
+      body:           body
+    };
+
+    // Send to both recipients via EmailJS
+    emailjs.send("service_o1h08gl", "template_gn4am6t", templateParams)
+      .then(function() {
+        // Show success screen
+        step.classList.add("exit");
+        setTimeout(function() {
+          step.classList.remove("active", "exit");
+          mfBody.querySelector('[data-step="6"]').classList.add("active");
+        }, 280);
+      }, function(error) {
+        // Still show success to user but log the error
+        console.error("EmailJS error:", error);
+        step.classList.add("exit");
+        setTimeout(function() {
+          step.classList.remove("active", "exit");
+          mfBody.querySelector('[data-step="6"]').classList.add("active");
+        }, 280);
+      });
   }
 
   if (mfSubmit) mfSubmit.addEventListener("click", validateAndSubmit);
@@ -2103,7 +2142,7 @@ We’d love to hear from you.</p>
       <div>
         <div class="footer-col-ttl">Contact</div>
         <ul class="footer-links">
-          <li><a href="mailto:contact@thefanhouseco.com">contact@thefanhouseco.com</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#1d7e7273697c7e695d6975787b7c737572686e787e72337e7270"><span class="__cf_email__" data-cfemail="d6b5b9b8a2b7b5a296a2beb3b0b7b8beb9a3a5b3b5b9f8b5b9bb">[email&#160;protected]</span></a></li>
           <li><a href="tel:+918200430753">+91 8200430753</a></li>
           <li><a href="tel:+919910057640">+91 99100 57640</a></li>
           <li><a href="https://instagram.com/thefanhousecommunity" target="_blank">@thefanhousecommunity</a></li>
@@ -2122,7 +2161,7 @@ We’d love to hear from you.</p>
   </div>
 </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* ══ NAV SCROLL for Contact Page ══ */
     var navContact = document.getElementById("nav-contact");
     if (navContact) window.addEventListener("scroll", function() {
@@ -2243,7 +2282,7 @@ We’d love to hear from you.</p>
       <div>
         <div class="footer-col-ttl">Contact</div>
         <ul class="footer-links">
-          <li><a href="mailto:contact@thefanhouseco.com">contact@thefanhouseco.com</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#72111d1c0613110632061a1714131c1a1d070117111d5c111d1f"><span class="__cf_email__" data-cfemail="4c2f2322382d2f380c3824292a2d222423393f292f23622f2321">[email&#160;protected]</span></a></li>
           <li><a href="tel:+918200430753">+91 8200430753</a></li>
           <li><a href="tel:+919910057640">+91 99100 57640</a></li>
           <li><a href="https://instagram.com/thefanhousecommunity" target="_blank">@thefanhousecommunity</a></li>
@@ -2265,19 +2304,3 @@ We’d love to hear from you.</p>
 </div><!-- /about-page -->
 
 <style>
-#about-page, #contact-page { display:none; }
-#about-page.active, #contact-page.active { display:block; }
-#about-page { background:var(--cream); color:var(--ink); }
-#about-page nav {
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:30px 48px;display:flex;align-items:center;justify-content:space-between;
-  background:var(--cream);border-bottom:1px solid rgba(30, 62, 42, 0.15);transition:all 0.5s;
-}
-#about-page .npill.g { color:rgba(26, 20, 16, 0.6); }
-#about-page .npill.g:hover { color:var(--ink); }
-#about-page .npill.cta { background:var(--fire);color:white; }
-</style>
-
-<script>
-  var navAbout = document.getElementById("nav-about");
-  if
