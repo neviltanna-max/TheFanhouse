@@ -780,6 +780,33 @@ font-family:var(--sans);}
 }
 .apply-submit:hover{background:#D03010;}
 .apply-note{font-size:11px;color:rgba(255, 255, 255, 0.28);letter-spacing:0.1em;}
+/* ── Apply section: tablet fix ── */
+@media (max-width: 1200px) {
+  .apply-inner {
+    gap: 48px;
+    padding: 80px 40px;
+  }
+  .apply-col-right {
+    padding-left: 0;
+    padding-top: 0;
+  }
+}
+@media (max-width: 768px) {
+  .apply-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 64px 24px;
+  }
+  .apply-col-right {
+    padding-left: 0;
+    padding-top: 0;
+  }
+  .apply-h2 {
+    font-size: clamp(48px, 14vw, 80px);
+  }
+}
+
 
 /* ─── FOOTER ─── */
 footer{background:#080705;padding:72px 0 40px;}
@@ -843,6 +870,44 @@ footer{background:#080705;padding:72px 0 40px;}
   }
   .footer-links a { white-space: normal; }
 }
+@media (max-width: 768px) {
+  /* ── Hero mobile layout ── */
+  #hero {
+    min-height: 100svh;
+    overflow: hidden;
+  }
+  .hero-content {
+    grid-template-columns: 1fr;
+    padding: 0 24px 120px;
+    gap: 28px;
+    align-items: end;
+  }
+  .hero-right {
+    padding-left: 0;
+  }
+  .hero-desc {
+    max-width: 100%;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
+  /* Hide stats bar on mobile to avoid clutter */
+  .hero-stats-bar {
+    display: none;
+  }
+  /* Scroll hint */
+  .hero-scroll {
+    display: none;
+  }
+}
+
 
 
 /* ─── REVEAL ─── */
@@ -926,6 +991,36 @@ footer{background:#080705;padding:72px 0 40px;}
 .social-link svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.5;fill:none;}
 .social-link:hover{border-color:var(--fire);background:rgba(232, 64, 28, 0.1);transform:translateY(-3px);box-shadow:0 8px 20px rgba(232, 64, 28, 0.15);}
 /* contact-page uses global footer styles */
+/* ── CONTACT PAGE — RESPONSIVE ── */
+@media (max-width: 900px) {
+  /* Override the inline padding:0 64px on the main content wrapper */
+  #contact-page main > div {
+    padding: 0 24px !important;
+  }
+  /* Push header down to clear the fixed nav */
+  .contact-header {
+    padding-top: 120px;
+    text-align: left;
+  }
+  .contact-header p {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+@media (max-width: 768px) {
+  #contact-page main > div {
+    padding: 0 20px !important;
+  }
+  .contact-header {
+    padding: 110px 0 40px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+  .contact-header p { margin-left: 0; text-align: left; }
+  .method-card { padding: 24px 20px; }
+  .form-section { padding: 32px 16px; }
+}
+
 
 /* ─── MOBILE ─── */
 @media(max-width:900px){
