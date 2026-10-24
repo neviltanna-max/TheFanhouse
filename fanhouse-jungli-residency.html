@@ -236,20 +236,8 @@ form{padding:24px 18px}
 <footer>The Fanhouse Community</footer>
 
 <script>
-/* ---------- CONFIG: connect to your Google Form ----------
-   1. Open your Google Form, click the three dots, choose "Get pre-filled link".
-   2. Fill every question with any answer, click "Get link", copy it.
-   3. Paste the form ID and the entry.XXXX numbers below.
-   FORM_ACTION looks like: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse            */
-var FORM_ACTION = "https://docs.google.com/forms/d/e/REPLACE_WITH_FORM_ID/formResponse";
-var ENTRY = {
-  name:"entry.0000000001", phone:"entry.0000000002", email:"entry.0000000003",
-  gender:"entry.0000000004", dob:"entry.0000000005", city:"entry.0000000006",
-  heard:"entry.0000000007", instagram:"entry.0000000008", draws:"entry.0000000009",
-  skills:"entry.0000000010", share:"entry.0000000011", affect:"entry.0000000012",
-  alcohol:"entry.0000000013", duration:"entry.0000000014", payment:"entry.0000000015",
-  policies:"entry.0000000016"
-};
+/* ---------- CONFIG: send website applications to Google Sheets via Apps Script ---------- */
+var FORM_ACTION = "https://script.google.com/macros/s/AKfycbxR5tlF5eSC2V7I8aQnyqV_y19AIEWApzxnXZYQnkJPwRQ5C_tZIeljcKNLusQlYTGk/exec";
 
 var CONTACT_HINT = "Please double-check, this is how we’ll contact you if you’re shortlisted!";
 var SCHEMA = [
@@ -338,28 +326,35 @@ form.addEventListener("submit",function(e){
   if(first){banner.style.display="block";banner.textContent="A few required answers are missing or need a look. They’re marked in red.";first.scrollIntoView({behavior:"smooth",block:"center"});return}
   banner.style.display="none";
 
-  var fd=new FormData();
-  SCHEMA.forEach(function(q){
-    if(!q.k)return;var v=vals[q.k],ek=ENTRY[q.k];
-    if(q.t==="check"){v.forEach(function(x){fd.append(ek,x)})}
-    else if(q.t==="date"){var p=v.split("-");fd.append(ek+"_year",p[0]);fd.append(ek+"_month",p[1]);fd.append(ek+"_day",p[2])}
-    else if(v==="__other__"){fd.append(ek,"__other_option__");fd.append(ek+".other_option_response",form.querySelector('.other[data-for="'+q.k+'"]').value.trim())}
-    else if(v!==""){fd.append(ek,v)}
+  // URL-encoded form data is compatible with Apps Script e.parameter and avoids a CORS preflight.
+  var payload = new URLSearchParams();
+  Object.keys(vals).forEach(function(k){
+    var v = vals[k];
+    if (Array.isArray(v)) v = v.join(", ");
+    if (k === "dob" && v) {
+      var parts = v.split("-");
+      v = Number(parts[1]) + "/" + Number(parts[2]) + "/" + parts[0];
+    }
+    if (v === "__other__") {
+      var other = form.querySelector('.other[data-for="'+k+'"]');
+      v = other ? other.value.trim() : "Other";
+    }
+    payload.append(k, v || "");
   });
 
   var btn=document.getElementById("go");btn.disabled=true;btn.textContent="Sending…";
   function finish(){
-    if(window.fbq)fbq("track","Lead"); // Meta Pixel conversion, only fires if the pixel is installed
+    if(window.fbq)fbq("track","Lead");
     form.style.display="none";
     var d=document.getElementById("done");d.style.display="block";
     document.getElementById("doneMsg").textContent="Thanks"+(vals.name?", "+vals.name.split(" ")[0]:"")+". We’ve got your application. If you’re shortlisted, someone from The Fanhouse team will be in touch with next steps.";
     d.scrollIntoView({behavior:"smooth",block:"center"});d.focus();
   }
-  if(FORM_ACTION.indexOf("REPLACE_WITH")>-1){console.log("Demo mode, form not connected yet. Would send:",Array.from(fd.entries()));setTimeout(finish,500);return}
-  fetch(FORM_ACTION,{method:"POST",mode:"no-cors",body:fd}).then(finish).catch(function(){
-    btn.disabled=false;btn.textContent="Submit application";
-    var b=document.getElementById("banner");b.style.display="block";b.textContent="That didn’t go through. Check your connection and try again.";
-  });
+  fetch(FORM_ACTION,{method:"POST",mode:"no-cors",body:payload.toString(),headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"}})
+    .then(finish).catch(function(){
+      btn.disabled=false;btn.textContent="Submit application";
+      var b=document.getElementById("banner");b.style.display="block";b.textContent="That didn’t go through. Check your connection and try again.";
+    });
 });
 </script>
 </body>
