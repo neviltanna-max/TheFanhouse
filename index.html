@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Fanhouse Residency, Goa 2025</title>
+<title>The Fanhouse Community</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -2174,64 +2174,28 @@ Because sometimes the best way to understand someone you admire is simply to spe
 <!-- ══════════════════════════════════════════
      APPLICATION FORM MODAL
 ══════════════════════════════════════════ -->
-<div aria-label="Apply for Goa 2025" aria-modal="true" class="modal-backdrop" id="applyModal" role="dialog">
+<div aria-label="Choose a residency chapter" aria-modal="true" class="modal-backdrop" id="applyModal" role="dialog">
 <div class="modal-box">
-<!-- Header -->
-<div class="modal-header">
-<div>
-<div class="modal-title">Apply for the Fanhouse Experience</div>
+  <div class="modal-header">
+    <div><div class="modal-title">Choose Your Chapter</div></div>
+    <button aria-label="Close" class="modal-close" id="modalClose" type="button">✕</button>
+  </div>
+  <div class="mf-body" id="mfBody">
+    <div class="mf-step active" data-step="1">
+      <div class="mf-field">
+        <label class="mf-label" for="f_chapter">Choose the Chapter <span class="req">*</span></label>
+        <select class="mf-input" id="f_chapter" required>
+          <option value="">Select an option</option>
+          <option value="jungli-chitrangada">The Fanhouse Residency with Chitrangada Satarupa - 7th to 10th Jan 2027</option>
+        </select>
+        <div class="mf-error-msg" id="chapterError" role="alert">Please choose a chapter.</div>
+      </div>
+      <div class="mf-field" style="margin-top:8px;">
+        <button class="mf-btn mf-btn-fire" id="mfNext" type="button" style="width:100%;padding:16px 28px;font-size:12px;letter-spacing:0.2em;">Next →</button>
+      </div>
+    </div>
+  </div>
 </div>
-<button aria-label="Close" class="modal-close" id="modalClose">✕</button>
-</div>
-<!-- Form body -->
-<div class="mf-body" id="mfBody">
-<!-- ── STEP 1: About You ── -->
-<div class="mf-step active" data-step="1">
-<div class="mf-field">
-<label class="mf-label">Choose the Chapter <span class="req">*</span></label>
-<select class="mf-input" id="f_chapter" required="">
-<option value="">Select an option</option>
-<option>Fanhouse Residency with Bharat Chandak - 20th to 24th April 2026</option>
-<option>Fanhouse Club trip to Bhutan - 2nd to 6th August 2026</option>
-<option>Fanhouse Residency with Gini - 15th to 18th October 2026</option>
-</select>
-</div>
-<div class="mf-field">
-<label class="mf-label" for="f_name">Full Name <span class="req">*</span></label>
-<input autocomplete="name" class="mf-input" id="f_name" placeholder="Your full name" required="" type="text"/>
-</div>
-<div class="mf-field">
-<label class="mf-label" for="f_phone">Phone Number <span class="req">*</span></label>
-<input autocomplete="tel" class="mf-input" id="f_phone" placeholder="+91 00000 00000" required="" type="tel"/>
-<div class="mf-hint">Please double-check, this is how we'll contact you if you're shortlisted!</div>
-</div>
-<div class="mf-field">
-<label class="mf-label" for="f_email">Email <span class="req">*</span></label>
-<input autocomplete="email" class="mf-input" id="f_email" placeholder="you@email.com" required="" type="email"/>
-<div class="mf-hint">Please double-check, this is how we'll contact you if you're shortlisted!</div>
-</div>
-<div class="mf-field">
-<label class="mf-label" for="f_location">Where are you based right now?</label>
-<input class="mf-input" id="f_location" placeholder="City, state, and country" type="text"/>
-<div class="mf-hint">Wherever you're calling home right now, even if you're in between places!</div>
-</div>
-<div class="mf-field">
-<label class="mf-label" for="f_busy">Is there anything you want to share with us?</label>
-<textarea class="mf-textarea" id="f_busy" placeholder="Tell us anything you'd like us to know..." rows="3"></textarea>
-</div>
-<div class="mf-field" style="margin-top:8px;">
-<button class="mf-btn mf-btn-fire" id="mfSubmit" style="width:100%;padding:16px 28px;font-size:12px;letter-spacing:0.2em;">Submit Application ✦</button>
-</div>
-</div>
-<!-- ── SUCCESS ── -->
-<div class="mf-step mf-success" data-step="6">
-<div class="mf-success-icon">✦</div>
-<div class="mf-success-title">Application Received</div>
-<div class="mf-success-body">Thank you for applying to the Fanhouse Experience. We read every single application. If you're shortlisted, we'll reach out via the phone number and email you provided.<br/><br/>In the meantime follow us on Instagram — <a href="https://instagram.com/thefanhousecommunity" style="color:var(--fire);text-decoration:none;" target="_blank">@thefanhousecommunity</a></div>
-<div class="mf-success-tag">Fanhouse Club trip to Bhutan — 2nd to 6th August 2026</div>
-</div>
-</div><!-- /mf-body -->
-</div><!-- /modal-box -->
 </div><!-- /modal-backdrop -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
@@ -2262,86 +2226,32 @@ Because sometimes the best way to understand someone you admire is simply to spe
     if (e.key === "Escape") closeModal();
   });
 
-  /* ══ SINGLE-STEP FORM SUBMIT ══ */
-  var mfSubmit = document.getElementById("mfSubmit");
-  var mfBody   = document.getElementById("mfBody");
+  /* ══ CHOOSE CHAPTER AND CONTINUE ══ */
+  var mfNext = document.getElementById("mfNext");
+  var chapterSelect = document.getElementById("f_chapter");
+  var chapterError = document.getElementById("chapterError");
 
-  function validateAndSubmit() {
-    var step = mfBody.querySelector('[data-step="1"]');
-
-    // Clear previous errors
-    step.querySelectorAll(".mf-error-msg").forEach(function(m) { m.classList.remove("show"); });
-    step.querySelectorAll(".error").forEach(function(el) { el.classList.remove("error"); });
-
-    var ok = true;
-    function err(el, msg) {
-      el.classList.add("error");
-      var m = el.nextElementSibling;
-      if (!m || !m.classList.contains("mf-error-msg")) {
-        m = document.createElement("div");
-        m.className = "mf-error-msg";
-        el.parentNode.insertBefore(m, el.nextSibling);
+  if (mfNext && chapterSelect) {
+    mfNext.addEventListener("click", function() {
+      if (!chapterSelect.value) {
+        chapterSelect.classList.add("error");
+        if (chapterError) chapterError.classList.add("show");
+        chapterSelect.focus();
+        return;
       }
-      m.textContent = msg || "This field is required.";
-      m.classList.add("show");
-      if (ok) el.scrollIntoView({ behavior: "smooth", block: "center" });
-      ok = false;
-    }
 
-    var chapter  = document.getElementById("f_chapter");
-    var name     = document.getElementById("f_name");
-    var phone    = document.getElementById("f_phone");
-    var email    = document.getElementById("f_email");
-    var location = document.getElementById("f_location");
-    var busy     = document.getElementById("f_busy");
+      chapterSelect.classList.remove("error");
+      if (chapterError) chapterError.classList.remove("show");
+      window.location.href = "fanhouse-jungli-residency.html";
+    });
 
-    if (!chapter.value) err(chapter, "Please choose a chapter.");
-    if (!name.value.trim())  err(name,  "Please enter your full name.");
-    if (!phone.value.trim()) err(phone, "Please enter your phone number.");
-    if (!email.value.trim() || !email.value.includes("@")) err(email, "Please enter a valid email.");
-
-    if (!ok) return;
-
-    // Disable button to prevent double-submit
-    mfSubmit.disabled = true;
-    mfSubmit.textContent = "Submitting…";
-
-    // Build email body
-    var body = [
-      "Chapter: "          + chapter.value,
-      "Full Name: "        + name.value.trim(),
-      "Phone: "            + phone.value.trim(),
-      "Email: "            + email.value.trim(),
-      "Location: "         + (location.value.trim() || "—"),
-      "Anything to share: "+ (busy.value.trim()     || "—")
-    ].join("\n");
-
-    var templateParams = {
-      applicant_name: name.value.trim(),
-      body:           body
-    };
-
-    // Send to both recipients via EmailJS
-    emailjs.send("service_o1h08gl", "template_gn4am6t", templateParams)
-      .then(function() {
-        // Show success screen
-        step.classList.add("exit");
-        setTimeout(function() {
-          step.classList.remove("active", "exit");
-          mfBody.querySelector('[data-step="6"]').classList.add("active");
-        }, 280);
-      }, function(error) {
-        // Still show success to user but log the error
-        console.error("EmailJS error:", error);
-        step.classList.add("exit");
-        setTimeout(function() {
-          step.classList.remove("active", "exit");
-          mfBody.querySelector('[data-step="6"]').classList.add("active");
-        }, 280);
-      });
+    chapterSelect.addEventListener("change", function() {
+      if (chapterSelect.value) {
+        chapterSelect.classList.remove("error");
+        if (chapterError) chapterError.classList.remove("show");
+      }
+    });
   }
-
-  if (mfSubmit) mfSubmit.addEventListener("click", validateAndSubmit);
 
   /* ══ NAV SCROLL ══ */
   var nav = document.getElementById("nav");
